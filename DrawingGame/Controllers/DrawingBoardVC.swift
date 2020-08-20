@@ -177,13 +177,21 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print("Save Photo")
         let photo = drawingBoardView.mainImage.image!.jpegData(compressionQuality: 0.75)!
         
-       // self.delegate?.addDrawingToDatabase(image: photo)
+        // Generate a random 15 character id number
+        let id = randomString(length: 15)
+                        
+        // Upload the drawing to Storage and create a document for the drawing in Firestore
+        let uploadDrawing = UploadDrawing()
+        uploadDrawing.uploadPhoto(photoId: "\(id)", data: photo)
+        uploadDrawing.createDrawingDocument(id: "\(id)", timeSpent: 553)
         
         self.navigationController?.popViewController(animated: true)
 
-           // let accessFirebaseStorage : AccessStorage = AccessStorage()
-            // Upload the photo
-           // accessFirebaseStorage.uploadTeenParentSignature(teenParentID: <#T##String#>, data: <#T##Data#>)
+    }
+    
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     // MARK: UIPickerViewDelegate

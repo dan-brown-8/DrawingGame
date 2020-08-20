@@ -12,11 +12,21 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        // Sets the color of the navigation bar
+        UINavigationBar.appearance().barTintColor = UIColor(red: 63.0/255.0, green: 152.0/255.0, blue: 93.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font : UIFont(name:"Palatino",size:25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        UINavigationBar.appearance().tintColor = .white
+               
+            // Creates the black border underneath the navigation bar
+            // Remove the background color.
+        UINavigationBar.appearance().setBackgroundImage(UIColor.clear.asOneByOneImage(), for: .default)
+               // Set the shadow color.
+        UINavigationBar.appearance().shadowImage = UIColor.black.asOneByOneImage()
+               
         
         return true
     }

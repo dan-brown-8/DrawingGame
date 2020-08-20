@@ -16,7 +16,13 @@ class LoginVC: UIViewController, BeginLoginDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Make the navigation bar invisible
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+              
+        // Sets the color of the 'Back' button on the navigation bar
+        navigationController?.navigationBar.tintColor = .white
     }
     
     override func viewWillDisappear(_ animated: Bool) {

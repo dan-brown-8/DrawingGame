@@ -10,32 +10,7 @@ import UIKit
 
 // Toolbar used to display a 'done' option on the picker
 extension UIToolbar {
-    /// Toolbar that contains a 'clear' button and 'done' button. Typically used for optional fields.
-    func ClearAndDoneToolBar(mySelect : Selector, clearSelect : Selector) -> UIToolbar {
-        
-        let toolBar = UIToolbar()
-        
-        // Format the toolbar
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        if #available(iOS 13.0, *) {
-            toolBar.tintColor = UIColor.label
-        } else {
-            // Fallback on earlier versions
-            toolBar.tintColor = UIColor.black
-        }
-        toolBar.sizeToFit()
-        
-        // Create the done button and space button
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: mySelect)
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let clearButton = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: clearSelect)
-        
-        toolBar.setItems([ clearButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        return toolBar
-    }
+   
     /// Toolbar that contains only the 'Done' button
     func DoneToolBar(mySelect : Selector) -> UIToolbar {
         
@@ -60,5 +35,20 @@ extension UIToolbar {
         toolBar.isUserInteractionEnabled = true
         
         return toolBar
+    }
+}
+
+// Allows us to add an image to the background of the View
+extension UIColor {
+    /**
+     Converts this `UIColor` instance to a 1x1 `UIImage` instance and returns it. Utilized for the border underneath the navigation bars.
+     - Returns: `self` as a 1x1 `UIImage`. **/
+    func asOneByOneImage() -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        setFill()
+        UIGraphicsGetCurrentContext()?.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        let image = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

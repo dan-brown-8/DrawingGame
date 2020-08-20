@@ -15,14 +15,30 @@ class PublicListVC: UIViewController {
     @IBOutlet var publicListView: PublicListView!
     
     // Load in data and store into the collection data array
-    var collectionData = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10", "test11", "test12"]
+    var collectionData = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10", "test11", "test12", "test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10", "test11", "test12"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let width = (view.frame.size.width - 20) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width) 
-        // Do any additional setup after loading the view.
+        layout.itemSize = CGSize(width: width, height: width)
+        
+        configureNavigationBar()
+        // Sets the title and back bar color of the navigation bar
+        self.navigationItem.title = "Public Drawings"
+    }
+    
+    func configureNavigationBar() {
+        // Add pencil image as navigation bar button
+        let imageBarButton = UIBarButtonItem(image: UIImage(named: "Pencil3.png")!.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.action(sender:)))
+        
+        // Adds the New+ button to the navigation bar
+        self.navigationItem.rightBarButtonItem = imageBarButton
+    }
+        
+    // Handle what happens when the 'New +' button is pressed, sho
+    @objc func action(sender: UIBarButtonItem) {
+            performSegue(withIdentifier: "toNewDrawing", sender: self)
     }
 }
     

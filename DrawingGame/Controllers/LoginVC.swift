@@ -40,10 +40,10 @@ class LoginVC: UIViewController, BeginLoginDelegate {
         // Assign user inputted email and password
         if let email = (self.loginView.emailTextField.text)?.lowercased(), let password = self.loginView.passwordTextField.text {
             
-            User.setEmail(email: email)
+            UserDataModel.setEmail(email: email)
                                 
             // Call Firebase Authentication, attempt to sign in with email and password
-            Auth.auth().signIn(withEmail: User.getEmail(), password: password) { (user, error) in
+            Auth.auth().signIn(withEmail: UserDataModel.getEmail(), password: password) { (user, error) in
                 if user != nil {
                     
                     // If the email/password were found, enter the app
@@ -52,7 +52,7 @@ class LoginVC: UIViewController, BeginLoginDelegate {
                     print("Successful login")
                     getUserData.delegate = self
                     
-                    getUserData.pullFromDatabase(email: User.getEmail())
+                    getUserData.pullFromDatabase(email: UserDataModel.getEmail())
                 }
                 else {
                     self.loginView.stopAnimatingSpinner()

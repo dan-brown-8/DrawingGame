@@ -60,8 +60,8 @@ class UploadDrawing {
         print("Creating photo document")
         
         let newDrawing: [String: Any] = [
-            "artist": User.getEmail(),
-            "displayName": User.getDisplayName(),
+            "artist": UserDataModel.getEmail(),
+            "displayName": UserDataModel.getDisplayName(),
             "videoReference": "null",
             "timeSpent": timeSpent,
             "dateCreated": NSDate().timeIntervalSince1970

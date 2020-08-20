@@ -45,7 +45,7 @@ class RegisterUser {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                User.setDisplayName(displayName: displayName!)
+                UserDataModel.setDisplayName(displayName: displayName!)
                 self.delegate?.segueToPublicList()
             }
         }

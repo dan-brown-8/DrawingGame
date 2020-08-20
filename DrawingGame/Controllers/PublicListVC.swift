@@ -14,8 +14,11 @@ class PublicListVC: UIViewController {
     
     @IBOutlet var publicListView: PublicListView!
     
-    // Load in data and store into the collection data array
-    var collectionData = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10", "test11", "test12", "test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test10", "test11", "test12"]
+    /// The thumbnail images of the drawings. Parallel array with 'drawingData'
+    var drawingImages = [UIImage]()
+    
+    /// The data that corresponds with the drawings.  Parallel array with 'drawingImages'
+    var drawingData : [DrawingDataModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +27,14 @@ class PublicListVC: UIViewController {
         layout.itemSize = CGSize(width: width, height: width)
         
         configureNavigationBar()
-        // Sets the title and back bar color of the navigation bar
-        self.navigationItem.title = "Public Drawings"
+        populateDrawingPhotos()
+        
+    }
+    
+    func populateDrawingPhotos() {
+        DownloadDrawings.singleton.dataDelegate = self
+        DownloadDrawings.singleton.photoDelegate = self
+        DownloadDrawings.singleton.listen()
     }
     
     func configureNavigationBar() {
@@ -34,6 +43,9 @@ class PublicListVC: UIViewController {
         
         // Adds the New+ button to the navigation bar
         self.navigationItem.rightBarButtonItem = imageBarButton
+        
+        // Sets the title and back bar color of the navigation bar
+        self.navigationItem.title = "Public Drawings"
     }
         
     // Handle what happens when the 'New +' button is pressed, sho
@@ -50,7 +62,7 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
     func collectionView(_ collectionView: UICollectionView,
                                     numberOfItemsInSection section: Int) -> Int {
-        return collectionData.count
+        return drawingImages.count
     }
         
     func collectionView(
@@ -59,6 +71,7 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! DrawingCollectionViewCell
             
+        cell.drawingImage.image = self.drawingImages[indexPath.row]
            // cell.drawingLabel.text = collectionData[indexPath.row]
             // TODO: Load drawing image into cell
          //   cell.drawingImage.
@@ -74,3 +87,43 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
 
 
 }
+
+extension PublicListVC: GetPhotoDelegate {
+    /// Protocol that receives the downloaded photo
+    func getPhoto(data: Data) {
+        self.drawingImages.append(UIImage(data: data)!)
+        collectionView.reloadData()
+      // print(self.collectionData)
+    }
+    
+    //func updateImages(image: Data, index: Int) {}
+    
+    func clearPhotoArray() {
+        self.drawingImages.removeAll()
+    }
+}
+
+extension PublicListVC: GetDrawingDataDelegate {
+    /**
+     Updates the table once the data is pulled from the database
+     
+     - Parameter jobData: An array that holds all of the job data pulled from the database
+     */
+    func updateData(data: [DrawingDataModel]) {
+        clearDrawingDataArray()
+        // Append the drawing data into the array
+        drawingData.append(contentsOf: data)
+        //print(data[0].getArtist())
+        //print(data[1].getDisplayName())
+        self.drawingImages.removeAll()
+    }
+    /// Clears all data from the holdData array
+    func clearDrawingDataArray() {
+        drawingData.removeAll()
+    }
+    /// Reloads the table
+    func reloadTable() {
+        collectionView.reloadData()
+    }
+}
+

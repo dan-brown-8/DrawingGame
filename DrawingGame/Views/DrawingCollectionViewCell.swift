@@ -12,4 +12,8 @@ class DrawingCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var drawingImage: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
 }

@@ -13,12 +13,13 @@
 		574AE84724EE20610037F4E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84624EE20610037F4E2 /* Extensions.swift */; };
 		574AE84924EE24A60037F4E2 /* BrushSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84824EE24A60037F4E2 /* BrushSettings.swift */; };
 		574AE84B24EE2F6F0037F4E2 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84A24EE2F6F0037F4E2 /* Format.swift */; };
-		574AE84D24EE34510037F4E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84C24EE34510037F4E2 /* User.swift */; };
+		574AE84D24EE34510037F4E2 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84C24EE34510037F4E2 /* UserDataModel.swift */; };
 		574AE84F24EE37B70037F4E2 /* GetUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84E24EE37B70037F4E2 /* GetUserData.swift */; };
 		574AE85124EE41E40037F4E2 /* CommonAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE85024EE41E40037F4E2 /* CommonAlerts.swift */; };
 		574AE85324EE47AF0037F4E2 /* RegisterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE85224EE47AF0037F4E2 /* RegisterUser.swift */; };
 		574AE85524EE60B50037F4E2 /* UploadDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE85424EE60B50037F4E2 /* UploadDrawing.swift */; };
 		574AE85724EE6AFE0037F4E2 /* DownloadDrawings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE85624EE6AFE0037F4E2 /* DownloadDrawings.swift */; };
+		574AE85924EEDCD10037F4E2 /* DrawingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE85824EEDCD10037F4E2 /* DrawingDataModel.swift */; };
 		57D18D0324ED792B0073761B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0224ED792B0073761B /* AppDelegate.swift */; };
 		57D18D0524ED792B0073761B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0424ED792B0073761B /* SceneDelegate.swift */; };
 		57D18D0724ED792B0073761B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0624ED792B0073761B /* SignUpVC.swift */; };
@@ -67,12 +68,13 @@
 		574AE84624EE20610037F4E2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		574AE84824EE24A60037F4E2 /* BrushSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSettings.swift; sourceTree = "<group>"; };
 		574AE84A24EE2F6F0037F4E2 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
-		574AE84C24EE34510037F4E2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		574AE84C24EE34510037F4E2 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		574AE84E24EE37B70037F4E2 /* GetUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserData.swift; sourceTree = "<group>"; };
 		574AE85024EE41E40037F4E2 /* CommonAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAlerts.swift; sourceTree = "<group>"; };
 		574AE85224EE47AF0037F4E2 /* RegisterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUser.swift; sourceTree = "<group>"; };
 		574AE85424EE60B50037F4E2 /* UploadDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDrawing.swift; sourceTree = "<group>"; };
 		574AE85624EE6AFE0037F4E2 /* DownloadDrawings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDrawings.swift; sourceTree = "<group>"; };
+		574AE85824EEDCD10037F4E2 /* DrawingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingDataModel.swift; sourceTree = "<group>"; };
 		57D18CFF24ED792B0073761B /* DrawingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D18D0224ED792B0073761B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57D18D0424ED792B0073761B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,7 +214,8 @@
 		57D18D3324ED7D5B0073761B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				574AE84C24EE34510037F4E2 /* User.swift */,
+				574AE84C24EE34510037F4E2 /* UserDataModel.swift */,
+				574AE85824EEDCD10037F4E2 /* DrawingDataModel.swift */,
 				574AE84E24EE37B70037F4E2 /* GetUserData.swift */,
 				574AE85224EE47AF0037F4E2 /* RegisterUser.swift */,
 				574AE85424EE60B50037F4E2 /* UploadDrawing.swift */,
@@ -505,11 +508,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				574AE85924EEDCD10037F4E2 /* DrawingDataModel.swift in Sources */,
 				57D18D0724ED792B0073761B /* SignUpVC.swift in Sources */,
 				574AE84924EE24A60037F4E2 /* BrushSettings.swift in Sources */,
 				574AE84B24EE2F6F0037F4E2 /* Format.swift in Sources */,
 				57D18D3D24ED7E2E0073761B /* LoginView.swift in Sources */,
-				574AE84D24EE34510037F4E2 /* User.swift in Sources */,
+				574AE84D24EE34510037F4E2 /* UserDataModel.swift in Sources */,
 				57D18D4324ED7E4C0073761B /* DrawingBoardView.swift in Sources */,
 				570FE25324EDFF1B0081BB9A /* DrawingCollectionViewCell.swift in Sources */,
 				574AE85124EE41E40037F4E2 /* CommonAlerts.swift in Sources */,

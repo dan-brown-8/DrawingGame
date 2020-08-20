@@ -8,12 +8,12 @@
 
 import Foundation
 
-class User {
+class UserDataModel {
     
     private static var email : String = ""
     private static var displayName : String = ""
     
-    let shared = User()
+    let shared = UserDataModel()
     
     private init() {}
     

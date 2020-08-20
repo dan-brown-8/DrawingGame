@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		277077401825B435F0CBA45C /* Pods_DrawingGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C346026131C93CD63A80CE /* Pods_DrawingGame.framework */; };
 		570FE25324EDFF1B0081BB9A /* DrawingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570FE25224EDFF1B0081BB9A /* DrawingCollectionViewCell.swift */; };
+		570FE25724EE09470081BB9A /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570FE25624EE09470081BB9A /* Borders.swift */; };
+		574AE84724EE20610037F4E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84624EE20610037F4E2 /* Extensions.swift */; };
+		574AE84924EE24A60037F4E2 /* BrushSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84824EE24A60037F4E2 /* BrushSettings.swift */; };
+		574AE84B24EE2F6F0037F4E2 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574AE84A24EE2F6F0037F4E2 /* Format.swift */; };
 		57D18D0324ED792B0073761B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0224ED792B0073761B /* AppDelegate.swift */; };
 		57D18D0524ED792B0073761B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0424ED792B0073761B /* SceneDelegate.swift */; };
 		57D18D0724ED792B0073761B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0624ED792B0073761B /* SignUpVC.swift */; };
@@ -53,6 +57,10 @@
 		31C346026131C93CD63A80CE /* Pods_DrawingGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrawingGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4331C9161ABEC759EAE3E2D0 /* Pods-DrawingGameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawingGameTests.release.xcconfig"; path = "Target Support Files/Pods-DrawingGameTests/Pods-DrawingGameTests.release.xcconfig"; sourceTree = "<group>"; };
 		570FE25224EDFF1B0081BB9A /* DrawingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCollectionViewCell.swift; sourceTree = "<group>"; };
+		570FE25624EE09470081BB9A /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
+		574AE84624EE20610037F4E2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		574AE84824EE24A60037F4E2 /* BrushSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSettings.swift; sourceTree = "<group>"; };
+		574AE84A24EE2F6F0037F4E2 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		57D18CFF24ED792B0073761B /* DrawingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D18D0224ED792B0073761B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57D18D0424ED792B0073761B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +117,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		570FE25424EE092D0081BB9A /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				570FE25624EE09470081BB9A /* Borders.swift */,
+				574AE84624EE20610037F4E2 /* Extensions.swift */,
+				574AE84824EE24A60037F4E2 /* BrushSettings.swift */,
+				574AE84A24EE2F6F0037F4E2 /* Format.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		57D18CF624ED792B0073761B = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +153,7 @@
 		57D18D0124ED792B0073761B /* DrawingGame */ = {
 			isa = PBXGroup;
 			children = (
+				570FE25424EE092D0081BB9A /* Tools */,
 				57D18D3524ED7D820073761B /* Storyboards */,
 				57D18D3324ED7D5B0073761B /* Model */,
 				57D18D3224ED7D110073761B /* Controllers */,
@@ -468,16 +488,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				57D18D0724ED792B0073761B /* SignUpVC.swift in Sources */,
+				574AE84924EE24A60037F4E2 /* BrushSettings.swift in Sources */,
+				574AE84B24EE2F6F0037F4E2 /* Format.swift in Sources */,
 				57D18D3D24ED7E2E0073761B /* LoginView.swift in Sources */,
 				57D18D4324ED7E4C0073761B /* DrawingBoardView.swift in Sources */,
 				570FE25324EDFF1B0081BB9A /* DrawingCollectionViewCell.swift in Sources */,
 				57D18D3924ED7DF80073761B /* DrawingBoardVC.swift in Sources */,
+				570FE25724EE09470081BB9A /* Borders.swift in Sources */,
 				57D18D0324ED792B0073761B /* AppDelegate.swift in Sources */,
 				57D18D4124ED7E3F0073761B /* PublicListView.swift in Sources */,
 				57D18D3F24ED7E360073761B /* SignUpView.swift in Sources */,
 				57D18D3B24ED7E1C0073761B /* PublicListVC.swift in Sources */,
 				57D18D3724ED7DB50073761B /* LoginVC.swift in Sources */,
 				57D18D0524ED792B0073761B /* SceneDelegate.swift in Sources */,
+				574AE84724EE20610037F4E2 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

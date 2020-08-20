@@ -26,24 +26,22 @@ class PublicListVC: UIViewController {
     }
 }
     
-    extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
 
-        func numberOfSections(in collectionView: UICollectionView) -> Int {
-          return 1
-        }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
         
-        //2
-        func collectionView(_ collectionView: UICollectionView,
-                                     numberOfItemsInSection section: Int) -> Int {
-            return collectionData.count
-        }
+    func collectionView(_ collectionView: UICollectionView,
+                                    numberOfItemsInSection section: Int) -> Int {
+        return collectionData.count
+    }
         
-        //3
-        func collectionView(
-          _ collectionView: UICollectionView,
-          cellForItemAt indexPath: IndexPath
-        ) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! DrawingCollectionViewCell
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! DrawingCollectionViewCell
             
            // cell.drawingLabel.text = collectionData[indexPath.row]
             // TODO: Load drawing image into cell
@@ -55,8 +53,8 @@ class PublicListVC: UIViewController {
             
           //  cell.backgroundColor = .blue
           // Configure the cell
-            return cell
-        }    
+        return cell
+    }    
 
 
 }

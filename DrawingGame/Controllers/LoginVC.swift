@@ -12,10 +12,21 @@ import FirebaseAuth
 
 class LoginVC: UIViewController {
     
+    @IBOutlet var loginView: LoginView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+   
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
 }
+
+
+
+

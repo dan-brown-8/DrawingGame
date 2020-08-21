@@ -31,108 +31,108 @@ protocol GetDrawingDataDelegate : class {
 /// Handle retrieving all drawing data and images
 class DownloadDrawings {
         
-        // MARK: Listeners for updates to the drawings in the database
-        static var drawingListener : ListenerRegistration?
+    // MARK: Listeners for updates to the drawings in the database
+    static var drawingListener : ListenerRegistration?
         
-        /// Singleton so the class can only be called once
-        static let singleton = DownloadDrawings()
+    /// Singleton so the class can only be called once
+    static let singleton = DownloadDrawings()
     
-        weak var dataDelegate : GetDrawingDataDelegate?
-        weak var photoDelegate : GetPhotoDelegate?
+    weak var dataDelegate : GetDrawingDataDelegate?
+    weak var photoDelegate : GetPhotoDelegate?
     
-        // Initialize database
-        var db = Firestore.firestore()
+    // Initialize database
+    var db = Firestore.firestore()
     
-        init() {
-            // Disable deprecated features
-            let settings = db.settings
-            settings.areTimestampsInSnapshotsEnabled = true
-            db.settings = settings
-        }
+    init() {
+        // Disable deprecated features
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+    }
     
-        /// Counts the number of times that the database has been queried
-        var countQueries = 0
+    /// Counts the number of times that the database has been queried
+    var countQueries = 0
         
-        func listen() {
+    func listen() {
             
-            /// Collection that holds the needed documents
-            let collection = db.collection("drawings")
+        /// Collection that holds the needed documents
+        let collection = db.collection("drawings")
             
-            // Pull the document data from the database
-            DownloadDrawings.drawingListener = collection.addSnapshotListener
-                { (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    }
-                    else {
-                        print("Drawing listener has begun listening...")
+        // Pull the document data from the database
+        DownloadDrawings.drawingListener = collection.addSnapshotListener
+            { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                }
+                else {
+                    print("Drawing listener has begun listening...")
                         
-                        guard let snapshot = querySnapshot else {
-                            print("Error fetching snapshots: \(err!)")
-                            return
-                        }
-                        // What occurs when a document is added, modified, or removed from the subset
-                        snapshot.documentChanges.forEach { diff in
-                            
-                            if (diff.type == .added) {
-                                // If this is the first time the documents are added, add them all into the jobData array
-                                // TODO: FIX THIS
-                                if (self.countQueries == 0) {
-                                    print("Data added")
-                                    // Clear photo array before reloading them
-                                    self.photoDelegate?.clearPhotoArray()
-                                    
-                                    // A short delay to allow the new photo to populate in Firebase Storage
-                                    let secondsToDelay = 1.0
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + secondsToDelay) {
-                                        self.getListenerData(querySnapshot: querySnapshot!)
-                                    }
-                                    
-                                    // Don't allow any duplicate database queries
-                                    self.countQueries += 1
-                                }
-                                else {
-                                    return
-                                }
-                            }
-                            if (diff.type == .modified) { // If the document data has been modified
-                                print("Data modified")
-                                self.getListenerData(querySnapshot: querySnapshot!)
-                                
-                            }
-                            if (diff.type == .removed) { // If the document data has been removed
-                                print("Data removed")
-                                self.getListenerData(querySnapshot: querySnapshot!)
-                            }
-                        }
-                        // Reset the count to 0, so more documents can be added if necessary
-                        self.countQueries = 0
+                    guard let snapshot = querySnapshot else {
+                        print("Error fetching snapshots: \(err!)")
+                        return
                     }
-            }
+                    // What occurs when a document is added, modified, or removed from the subset
+                    snapshot.documentChanges.forEach { diff in
+                            
+                        if (diff.type == .added) {
+                            // If this is the first time the documents are added, add them all into the jobData array
+                            // TODO: FIX THIS
+                            if (self.countQueries == 0) {
+                                print("Data added")
+                                // Clear photo array before reloading them
+                                self.photoDelegate?.clearPhotoArray()
+                                    
+                                // A short delay to allow the new photo to populate in Firebase Storage
+                                let secondsToDelay = 1.0
+                                DispatchQueue.main.asyncAfter(deadline: .now() + secondsToDelay) {
+                                    self.getListenerData(querySnapshot: querySnapshot!)
+                                }
+                                    
+                                // Don't allow any duplicate database queries
+                                self.countQueries += 1
+                            }
+                            else {
+                                return
+                            }
+                        }
+                        if (diff.type == .modified) { // If the document data has been modified
+                            print("Data modified")
+                            self.getListenerData(querySnapshot: querySnapshot!)
+                                
+                        }
+                        if (diff.type == .removed) { // If the document data has been removed
+                            print("Data removed")
+                            self.getListenerData(querySnapshot: querySnapshot!)
+                        }
+                    }
+                    // Reset the count to 0, so more documents can be added if necessary
+                    self.countQueries = 0
+                }
         }
+    }
         
-        /// Decides which getData function will be called based on the job type
-        func getListenerData(querySnapshot: QuerySnapshot) {
+    /// Decides which getData function will be called based on the job type
+    func getListenerData(querySnapshot: QuerySnapshot) {
             
-            let drawingData = getDrawingData(documents: querySnapshot.documents)
+        let drawingData = getDrawingData(documents: querySnapshot.documents)
             
-            // Passes the job data array to a ViewController
-            self.dataDelegate?.updateData(data: drawingData)
-            // Reload the table to display the new data
-            self.dataDelegate?.reloadTable()
-        }
+        // Passes the job data array to a ViewController
+        self.dataDelegate?.updateData(data: drawingData)
+        // Reload the table to display the new data
+        self.dataDelegate?.reloadTable()
+    }
         
-        /// Creates an array of DrawingDataModel using the Firebase query
-        func getDrawingData(documents: [QueryDocumentSnapshot]) -> [DrawingDataModel] {
-            var drawings : [DrawingDataModel] = []
-            for document in documents {
-                drawings.append(DrawingDataModel(document: document))
-                // Downlaod the photo that corresponds with the drawing document
-                self.downloadPhoto(id: document.documentID)
-            }
-            
-            return drawings
+    /// Creates an array of DrawingDataModel using the Firebase query
+    func getDrawingData(documents: [QueryDocumentSnapshot]) -> [DrawingDataModel] {
+        var drawings : [DrawingDataModel] = []
+        for document in documents {
+            drawings.append(DrawingDataModel(document: document))
+            // Downlaod the photo that corresponds with the drawing document
+            self.downloadPhoto(id: document.documentID)
         }
+            
+        return drawings
+    }
     
 
     /// Download the image to be displayed on a View Controller

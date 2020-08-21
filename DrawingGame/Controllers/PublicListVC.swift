@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PublicListVC: UIViewController {
+class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -47,6 +47,21 @@ class PublicListVC: UIViewController {
         // Sets the title and back bar color of the navigation bar
         self.navigationItem.title = "Public Drawings"
     }
+    
+   /* func presentPopUpVC (popUpVC : UIViewController) {
+        // Animation customized in the TutoringJobDetailsVC
+        popUpVC.modalPresentationStyle = .custom
+        popUpVC.preferredContentSize = CGSize(width:500,height:600) //manage according to Device like iPad/iPhone
+        let popover = popUpVC.popoverPresentationController
+        
+        popover?.delegate = self
+        popover?.sourceView = self.view
+        popover?.sourceRect = CGRect(x: view.center.x, y: view.center.y, width: 0, height: 0)
+        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        
+        self.present(popUpVC, animated: true, completion: nil)
+        
+    } */
         
     // Handle what happens when the 'New +' button is pressed, sho
     @objc func action(sender: UIBarButtonItem) {
@@ -72,6 +87,8 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! DrawingCollectionViewCell
             
         cell.drawingImage.image = self.drawingImages[indexPath.row]
+        
+       // self.drawingData[indexPath.row].getDocId()
            // cell.drawingLabel.text = collectionData[indexPath.row]
             // TODO: Load drawing image into cell
          //   cell.drawingImage.
@@ -83,7 +100,15 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
           //  cell.backgroundColor = .blue
           // Configure the cell
         return cell
-    }    
+    }
+    // When a drawing is selected, display the drawing details pop up and pass in the data
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       // guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+
+        let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "drawingDetailsId") as! DrawingDetailsVC
+        popUpVC.drawingData = self.drawingData[indexPath.row]
+        PresentPopUpVC.presentPopUp(popUpVC: popUpVC, presentingVC: self)        
+    }
 
 
 }

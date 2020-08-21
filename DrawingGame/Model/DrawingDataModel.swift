@@ -16,6 +16,7 @@ class DrawingDataModel {
     private var timeSpent : Int = 0
     private var dateCreated : Double = 0.0
     private var videoReference : String = ""
+    private var docId : String = ""
         
     init() {
     }
@@ -27,7 +28,7 @@ class DrawingDataModel {
         if let displayName = document.get("displayName") as? String { setDisplayName(displayName: displayName) }
         if let timeSpent = document.get("timeSpent") as? Int { setTimeSpent(timeSpent: timeSpent) }
         if let videoReference = document.get("videoReference") as? String { setVideoReference(videoReference: videoReference) }
-
+        setDocId(docId: document.documentID)
     }
 
     
@@ -53,6 +54,10 @@ class DrawingDataModel {
         return videoReference
     }
     
+    public func getDocId() -> String {
+        return docId
+    }
+    
     // MARK: Mutators
 
     public func setArtist(artist : String) {
@@ -73,5 +78,9 @@ class DrawingDataModel {
     
     public func setVideoReference(videoReference : String) {
         self.videoReference = videoReference
+    }
+    
+    public func setDocId(docId : String) {
+        self.docId = docId
     }
 }

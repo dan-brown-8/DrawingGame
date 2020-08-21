@@ -10,14 +10,14 @@ import UIKit
 import FirebaseStorage
 import FirebaseFirestore
 
-/// Download/Upload data to Firebase Storage
+/// Upload photo to Firebase Storage and the drawing data to Firestore
 class UploadDrawing {
     
     // Initialize database
     var db = Firestore.firestore()
     
     /// Used to login the user once the account has been created
-    weak var delegate : AccountCreatedDelegate?
+   // weak var delegate : AccountCreatedDelegate?
     
     init() {
         // Disable deprecated features
@@ -31,11 +31,9 @@ class UploadDrawing {
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
         
-        // CHANGE THE VERSION # IF WE CHANGE THE TEENPARENT AGREEMENT
         // Create a storage reference from our storage service
         let storageRef = storage.reference(withPath: "photos/" + photoId)
         
-        // Upload the file to the path "job/(jobType)/(jobID)/(jobPhase)"
         let uploadTask = storageRef.putData(data, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!

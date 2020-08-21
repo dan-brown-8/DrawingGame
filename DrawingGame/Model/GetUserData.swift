@@ -40,7 +40,7 @@ class GetUserData {
             if let document = document, document.exists {
                 
                 // Grab any additional user data here
-                UserDataModel.setDisplayName(displayName: "displayName")
+                UserDataModel.setDisplayName(displayName: document.get("displayName") as! String)
                 
                 self.delegate?.segueToPublicList()
             }

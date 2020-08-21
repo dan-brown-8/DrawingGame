@@ -6,11 +6,11 @@
 If the drawing you have chosen is owned by you, you will have the option to delete it.
 - If you click on the pencil icon at the top right of the screen (on the navigation bar) you will be able to create your own drawing. 
 
-![alt text](http://url/to/DrawingGameImages/Screen Shot 2020-08-21 at 2.39.36 PM.png)
+![alt text](file:///Users/danbrown/Documents/Career/DrawingGame/DrawingGame/DrawingGameImages/Screen%20Shot%202020-08-21%20at%202.39.36%20PM.png)
 
 - Click on the text fields above the piece of paper to customize the color, utensil, and brush width.
 
-![alt text](http://url/to/DrawingGameImages/Screen Shot 2020-08-21 at 2.39.45 PM.png)
+![alt text](file:///Users/danbrown/Documents/Career/DrawingGame/DrawingGame/DrawingGameImages/Screen%20Shot%202020-08-21%20at%202.39.45%20PM.png)
 
 
 **Architecture:**

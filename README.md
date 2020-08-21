@@ -6,11 +6,12 @@
 If the drawing you have chosen is owned by you, you will have the option to delete it.
 - If you click on the pencil icon at the top right of the screen (on the navigation bar) you will be able to create your own drawing. 
 
-/Users/danbrown/Documents/Career/DrawingGame/DrawingGame/DrawingGameImages/Screen Shot 2020-08-21 at 2.39.36 PM.png
+https://raw.github.com/{dan-brown-8}/{DrawingGame}/{master}/{DrawingGameImages/Screen_Shot_2020-08-21_at_2.39.36_PM.png}
 
 - Click on the text fields above the piece of paper to customize the color, utensil, and brush width.
 
-/Users/danbrown/Documents/Career/DrawingGame/DrawingGame/DrawingGameImages/Screen Shot 2020-08-21 at 2.39.45 PM.png
+![Alt text](DrawingGameImages/Screen Shot 2020-08-21 at 2.39.45 PM.png?raw=true "Title")
+
 
 **Architecture:**
 - I used MVC since that is what I am most experienced with and considering the time restriction it made the most sense. 

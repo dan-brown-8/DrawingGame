@@ -6,7 +6,7 @@
 If the drawing you have chosen is owned by you, you will have the option to delete it.
 - If you click on the pencil icon at the top right of the screen (on the navigation bar) you will be able to create your own drawing. 
 
-![Alt text](DrawingGameImages/Screen Shot 2020-08-21 at 2.39.36 PM.png?raw=true "Title")
+![Alt text](DrawingGame/DrawingGameImages/Screen Shot 2020-08-21 at 2.39.36 PM.png?raw=true "Public List View Controller")
 
 - Click on the text fields above the piece of paper to customize the color, utensil, and brush width.
 

@@ -64,23 +64,30 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
         // Fills the text field when 'Done' is pressed
         if (drawingBoardView.brushColorTextField.isEditing) {
+            
             let selectedRow : Int = drawingBoardView.brushColorPicker.selectedRow(inComponent: 0)
             drawingBoardView.brushColorTextField.text = drawingBoardView.brushColorOptions[selectedRow]
                                         
             // Get the brushes UIColor from the pickers String value
             let color = BrushSettings.colors[drawingBoardView.brushColorOptions[selectedRow]]
             
-            // Adjust the brush color value based on the selected option
-            self.brushColor = color ?? UIColor.black
+            if (drawingBoardView.utensilTextField.text == "Eraser") {
+                self.brushColor = .white
+            }
+            else {
+                // Adjust the brush color value based on the selected option
+                self.brushColor = color ?? UIColor.black
+                
+            }
             
             // Make sure the text is still easily visible if the selected color is a light color
-            if (self.brushColor == UIColor.yellow || self.brushColor == UIColor.green) {
+            if (color == UIColor.yellow || color == UIColor.green) {
                 drawingBoardView.brushColorTextField.textColor = .black
             }
             else {
                 drawingBoardView.brushColorTextField.textColor = .white
             }
-            
+        
             drawingBoardView.brushColorTextField.backgroundColor = color
         }
         

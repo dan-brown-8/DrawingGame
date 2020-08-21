@@ -42,10 +42,14 @@ class DownloadDrawings {
     // Initialize database
     var db = Firestore.firestore()
     
+    deinit {
+        DownloadDrawings.drawingListener?.remove()
+    }
+    
     init() {
         // Disable deprecated features
         let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
+      //  settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
     }
     
@@ -74,9 +78,8 @@ class DownloadDrawings {
                         if (diff.type == .added) {
                             // If this is the first time the documents are added, add them all into the photo dictionary
                             if (self.countQueries == 0) {
-                                //print("Data added")
-                                // Clear photo array before reloading them
                                 self.photoDelegate?.clearPhotoDictionary()
+                                self.dataDelegate?.clearDrawingDataArray()
                                     
                                 // A short delay to allow the new photo to populate in Firebase Storage
                                 let secondsToDelay = 1.0
@@ -97,8 +100,14 @@ class DownloadDrawings {
                                 
                         }
                         if (diff.type == .removed) { // If the document data has been removed
+                            if (self.countQueries == 0) {
+                                
                             print("Data removed")
                             self.getListenerData(querySnapshot: querySnapshot!)
+                                self.countQueries += 1
+                                
+                            }
+
                         }
                     }
                     // Reset the count to 0, so more documents can be added if necessary
@@ -109,6 +118,8 @@ class DownloadDrawings {
         
     func getListenerData(querySnapshot: QuerySnapshot) {
             
+        print("GetListenerDataCalled")
+
         let drawingData = getDrawingData(documents: querySnapshot.documents)
             
         // Passes the job data array to a ViewController
@@ -120,8 +131,11 @@ class DownloadDrawings {
     /// Creates an array of DrawingDataModel using the Firebase query
     func getDrawingData(documents: [QueryDocumentSnapshot]) -> [DrawingDataModel] {
         var drawings : [DrawingDataModel] = []
+        print("GET DRAWING DATA CALLED")
         for document in documents {
             drawings.append(DrawingDataModel(document: document))
+            print("DRAWINGS")
+            print(drawings)
             // Downlaod the photo that corresponds with the drawing document
             self.downloadPhoto(id: document.documentID)
         }
@@ -134,9 +148,7 @@ class DownloadDrawings {
     func downloadPhoto(id: String) {
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
-        
-        print("Downloading drawing photo")
-        
+            
         // Create a storage reference to match the path of the needed image
         let storageRef = storage.reference(withPath: "photos/" + id)
         
@@ -145,6 +157,7 @@ class DownloadDrawings {
             if let error = error {
                 print("ERROR Downloading the drawing photo: " + "\(error)")
                 // Uh-oh, an error occurred!
+                self.dataDelegate?.reloadTable()
             } else {
                 // Data for the image is returned
                 print("Download Occuring")

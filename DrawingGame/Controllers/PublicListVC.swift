@@ -81,13 +81,24 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     // When a drawing is selected, display the drawing details pop up and pass in the data
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "drawingDetailsId") as! DrawingDetailsVC
-        popUpVC.drawingData = self.drawingData[indexPath.row]
+      //  popUpVC.drawingData = self.drawingData[indexPath.row]
+        
+        if let newData = self.drawingData[indexPath.row] as? DrawingDataModel {
+            popUpVC.drawingData = newData }
+        else {
+            print("Error, photo out of range") }
         
         let imageRef = self.drawingData[indexPath.row].getDocId()
-        popUpVC.drawingImage = (self.drawingImages[imageRef] as? UIImage)!
-        PresentPopUpVC.presentPopUp(popUpVC: popUpVC, presentingVC: self)
+        
+        if let newImage = (self.drawingImages[imageRef] as? UIImage) {
+            popUpVC.drawingImage = newImage
+            PresentPopUpVC.presentPopUp(popUpVC: popUpVC, presentingVC: self)
+        }
+        else {
+            print("Error, imageRef is invalid")
+        }
     }
 
 
@@ -117,7 +128,7 @@ extension PublicListVC: GetDrawingDataDelegate {
         drawingData.append(contentsOf: data)
         self.drawingImages.removeAllObjects()
     }
-    /// Clears all data from the holdData array
+    /// Clears all data from the drawing data array
     func clearDrawingDataArray() {
         drawingData.removeAll()
     }

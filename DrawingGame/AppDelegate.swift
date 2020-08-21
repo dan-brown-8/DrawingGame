@@ -27,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                // Set the shadow color.
         UINavigationBar.appearance().shadowImage = UIColor.black.asOneByOneImage()
                
+        // MARK: Remove all potential listeners
+        if (DownloadDrawings.drawingListener != nil) {
+            DownloadDrawings.drawingListener!.remove()
+            print("DownloadDrawings Listener removed")
+        }
         
         return true
     }
@@ -43,6 +48,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        
+        // MARK: Remove all potential listeners
+        if (DownloadDrawings.drawingListener != nil) {
+            DownloadDrawings.drawingListener!.remove()
+            print("DownloadDrawings Listener removed")
+        }
+        
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+        
     }
 
 

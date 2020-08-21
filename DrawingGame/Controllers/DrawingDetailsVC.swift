@@ -50,7 +50,7 @@ class DrawingDetailsVC: UIViewController {
         drawingDetailsView.timeSpentLabel.text = formatTimeSpent()
         drawingDetailsView.dateAndTimeCreatedLabel.text = date
         drawingDetailsView.drawingImage.image = self.drawingImage
-        
+                
         self.showAnimation()
     }
     

@@ -23,6 +23,8 @@ class LoginVC: UIViewController, BeginLoginDelegate {
               
         // Sets the color of the 'Back' button on the navigation bar
         navigationController?.navigationBar.tintColor = .white
+        
+        DownloadDrawings.drawingListener?.remove()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

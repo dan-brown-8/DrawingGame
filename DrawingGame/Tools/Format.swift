@@ -17,3 +17,23 @@ class FormatButton: UIButton {
         button.clipsToBounds = true
     }
 }
+
+/// This class takes a timestamp, assigns the date and time to separate variables, and formats the variables to be displayed in a ViewController
+class FormatDate {
+    
+    /// Formats the timestamp into a date that will be displayed on a ViewController.
+    static func formatDate(timestamp: Double) -> String {
+        
+        let myTimeInterval = TimeInterval(timestamp)
+        let date = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval))
+        
+        let dateFormatter = DateFormatter()
+    
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "en_US")
+        
+        return dateFormatter.string(from: date as Date)
+    }
+}
+

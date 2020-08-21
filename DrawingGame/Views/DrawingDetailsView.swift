@@ -16,6 +16,7 @@ class DrawingDetailsView: UIView {
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var timeSpentLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var dateAndTimeCreatedLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -43,11 +43,26 @@ class DrawingDetailsVC: UIViewController {
             drawingDetailsView.deleteButton.isHidden = true
         }
         
+        let date = FormatDate.formatDate(timestamp: drawingData.getDateCreated())
+       // let time = FormatDate.formatTime(timestamp: drawingData.getDateCreated())
+            
         drawingDetailsView.artistLabel.text = "By " + drawingData.getDisplayName()
-        drawingDetailsView.timeSpentLabel.text = "Time Spent:\n" + "\(drawingData.getTimeSpent())"
+        drawingDetailsView.timeSpentLabel.text = formatTimeSpent()
+        drawingDetailsView.dateAndTimeCreatedLabel.text = date
         
         self.showAnimation()
-
+    }
+    
+    func formatTimeSpent() -> String {
+        let minutes = Int(drawingData.getTimeSpent() / 60)
+        let seconds = drawingData.getTimeSpent() % 60
+        
+        if (minutes == 0) {
+            return "Time Spent:\n " + "\(seconds)" + " seconds"
+        }
+        else {
+            return "Time Spent:\n " + "\(minutes)" + " minutes " + "\(seconds)" + " seconds"
+        }
     }
     
     func loadInDrawingVideo() {

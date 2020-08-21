@@ -45,20 +45,19 @@ class DrawingBoardView: UIView, UITextViewDelegate, UITextFieldDelegate {
         brushWidthTextField.delegate = self
         
         // Change the placeholder text color to black
-        brushColorTextField.attributedPlaceholder = NSAttributedString(string: "Color",
+        brushColorTextField.attributedPlaceholder = NSAttributedString(string: "Black",
                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         // Change the placeholder text color to black
-        utensilTextField.attributedPlaceholder = NSAttributedString(string: "Utensil",
+        utensilTextField.attributedPlaceholder = NSAttributedString(string: "Brush",
                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
         // Change the placeholder text color to black
-        brushWidthTextField.attributedPlaceholder = NSAttributedString(string: "Width",
+        brushWidthTextField.attributedPlaceholder = NSAttributedString(string: "Medium",
                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
         //self.backgroundColor = UIColor.lightGray()
         self.bringSubviewToFront(mainImage)
         self.bringSubviewToFront(tempDrawImage)
-        
     }
     
     /// Adds borders to the views

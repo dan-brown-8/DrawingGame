@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Foundation
+import QuartzCore
+import AVFoundation
 
 class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -18,15 +21,26 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var lastPoint = CGPoint.zero
     var brushColor = UIColor.black
-    var brushWidth : CGFloat = 2.0
+    var brushWidth : CGFloat = 4.5
     var opacity : CGFloat = 1.0
     var swiped = false
+    //declare blank timer variable
+    var timer = Timer()
+    var timeSpentDrawing : Int = 0
+    
+   // private let screenRecorder = ScreenRecorder()
+   // private var player: AVAudioPlayer?
+    
+    var isRecording = false
+    
+   // let recorder = Recorder()
         
     override func viewDidLoad() {
         super.viewDidLoad()
             
         self.title = "Drawing Board"
         createPickers()
+        //  recorder.view = drawingBoardView
     }
     
     /// Creates all of the pickers to be used in the VC
@@ -36,7 +50,6 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.drawingBoardView.utensilTextField.inputView = drawingBoardView.utensilPicker
         self.drawingBoardView.brushWidthTextField.inputView = drawingBoardView.brushWidthPicker
 
-        
         // The toolbars for the picker views
         let doneToolBar = UIToolbar().DoneToolBar(mySelect: #selector(DrawingBoardVC.dismissPicker))
 
@@ -53,6 +66,11 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.drawingBoardView.brushWidthPicker.delegate = self
         self.drawingBoardView.brushWidthPicker.dataSource = self
         
+    }
+    
+    @objc func startTimer() {
+        print("timer fired!")
+        self.timeSpentDrawing += 1
     }
     
     /// Dismisses the picker and fills the text field
@@ -83,14 +101,18 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Fills the text field when 'Done' is pressed
         if (drawingBoardView.utensilTextField.isEditing) {
             let selectedRow : Int = drawingBoardView.utensilPicker.selectedRow(inComponent: 0)
-                drawingBoardView.utensilTextField.text = drawingBoardView.utensilOptions[selectedRow]
+            drawingBoardView.utensilTextField.text = drawingBoardView.utensilOptions[selectedRow]
+            
+            if (drawingBoardView.utensilOptions[selectedRow] == "Eraser") {
+                self.brushColor = .white
+            }
+            
         }
 
-        
         // Fills the text field when 'Done' is pressed
         if (drawingBoardView.brushWidthTextField.isEditing) {
             let selectedRow : Int = drawingBoardView.brushWidthPicker.selectedRow(inComponent: 0)
-                drawingBoardView.brushWidthTextField.text = drawingBoardView.brushWidthOptions[selectedRow]
+            drawingBoardView.brushWidthTextField.text = drawingBoardView.brushWidthOptions[selectedRow]
             
             // Adjust the brush width value
             let width = BrushSettings.width[drawingBoardView.brushWidthOptions[selectedRow]]
@@ -105,10 +127,16 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         guard let touch = touches.first else {
             return
         }
+        
+        if (isRecording == false) {
+            self.isRecording = true
+            // Start timer
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+        }
+
         swiped = false
         lastPoint = touch.location(in: drawingBoardView.mainImage)
-
-            
+    
     }
         
     func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
@@ -183,7 +211,14 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // Upload the drawing to Storage and create a document for the drawing in Firestore
         let uploadDrawing = UploadDrawing()
         uploadDrawing.uploadPhoto(photoId: "\(id)", data: photo)
-        uploadDrawing.createDrawingDocument(id: "\(id)", timeSpent: 553)
+        uploadDrawing.createDrawingDocument(id: "\(id)", timeSpent: self.timeSpentDrawing)
+        
+        // Stop timer
+        timer.invalidate()
+      /*  screenRecorder.stoprecording(errorHandler: { error in
+            debugPrint("Error when recording \(error)")
+        }) */
+       // recorder.stop()
         
         self.navigationController?.popViewController(animated: true)
 

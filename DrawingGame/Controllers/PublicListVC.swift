@@ -14,10 +14,10 @@ class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet var publicListView: PublicListView!
     
-    /// The thumbnail images of the drawings. Parallel array with 'drawingData'
-    var drawingImages = [UIImage]()
+    /// The thumbnail images of the drawings.
+    var drawingImages : NSMutableDictionary = NSMutableDictionary()
     
-    /// The data that corresponds with the drawings.  Parallel array with 'drawingImages'
+    /// The data that corresponds with the drawings
     var drawingData : [DrawingDataModel] = []
     
     override func viewDidLoad() {
@@ -31,6 +31,7 @@ class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
     }
     
+    /// Activate the Firebase listener and grab the drawing photos
     func populateDrawingPhotos() {
         DownloadDrawings.singleton.dataDelegate = self
         DownloadDrawings.singleton.photoDelegate = self
@@ -48,21 +49,6 @@ class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.navigationItem.title = "Public Drawings"
     }
     
-   /* func presentPopUpVC (popUpVC : UIViewController) {
-        // Animation customized in the TutoringJobDetailsVC
-        popUpVC.modalPresentationStyle = .custom
-        popUpVC.preferredContentSize = CGSize(width:500,height:600) //manage according to Device like iPad/iPhone
-        let popover = popUpVC.popoverPresentationController
-        
-        popover?.delegate = self
-        popover?.sourceView = self.view
-        popover?.sourceRect = CGRect(x: view.center.x, y: view.center.y, width: 0, height: 0)
-        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-        
-        self.present(popUpVC, animated: true, completion: nil)
-        
-    } */
-        
     // Handle what happens when the 'New +' button is pressed, sho
     @objc func action(sender: UIBarButtonItem) {
             performSegue(withIdentifier: "toNewDrawing", sender: self)
@@ -86,19 +72,10 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! DrawingCollectionViewCell
             
-        cell.drawingImage.image = self.drawingImages[indexPath.row]
+        // Make sure the drawing data and drawing images are linked/parallel
+        let imageRef = self.drawingData[indexPath.row].getDocId()
+        cell.drawingImage.image = self.drawingImages[imageRef] as? UIImage
         
-       // self.drawingData[indexPath.row].getDocId()
-           // cell.drawingLabel.text = collectionData[indexPath.row]
-            // TODO: Load drawing image into cell
-         //   cell.drawingImage.
-            
-          /*  if let label = cell.viewWithTag(100) as? UILabel {
-                label.text = collectionData[indexPath.row]
-            } */
-            
-          //  cell.backgroundColor = .blue
-          // Configure the cell
         return cell
     }
     // When a drawing is selected, display the drawing details pop up and pass in the data
@@ -115,16 +92,13 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension PublicListVC: GetPhotoDelegate {
     /// Protocol that receives the downloaded photo
-    func getPhoto(data: Data) {
-        self.drawingImages.append(UIImage(data: data)!)
+    func getPhoto(data: Data, id: String) {
+        self.drawingImages.setValue(UIImage(data: data)!, forKey: id)
         collectionView.reloadData()
-      // print(self.collectionData)
     }
-    
-    //func updateImages(image: Data, index: Int) {}
-    
-    func clearPhotoArray() {
-        self.drawingImages.removeAll()
+        
+    func clearPhotoDictionary() {
+        self.drawingImages.removeAllObjects()
     }
 }
 
@@ -136,11 +110,9 @@ extension PublicListVC: GetDrawingDataDelegate {
      */
     func updateData(data: [DrawingDataModel]) {
         clearDrawingDataArray()
-        // Append the drawing data into the array
+        // Append the drawing data into the dictionary
         drawingData.append(contentsOf: data)
-        //print(data[0].getArtist())
-        //print(data[1].getDisplayName())
-        self.drawingImages.removeAll()
+        self.drawingImages.removeAllObjects()
     }
     /// Clears all data from the holdData array
     func clearDrawingDataArray() {

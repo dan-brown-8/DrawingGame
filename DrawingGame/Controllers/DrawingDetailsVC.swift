@@ -65,6 +65,7 @@ class DrawingDetailsVC: UIViewController {
             deleteInFirebase.deletePhoto(photoId: self.drawingData.getDocId())
             
             _ = self.navigationController?.popViewController(animated: true)
+            self.removeAnimation()
             
             // notify teenPros that had applied to job
         }))

@@ -17,9 +17,9 @@ import FirebaseFirestore
  
  */
 protocol GetPhotoDelegate: class {
-    func getPhoto(data: Data)
+    func getPhoto(data: Data, id: String)
  //   func updateImages(image: Data, index: Int)
-    func clearPhotoArray()
+    func clearPhotoDictionary()
 }
 
 protocol GetDrawingDataDelegate : class {
@@ -75,12 +75,11 @@ class DownloadDrawings {
                     snapshot.documentChanges.forEach { diff in
                             
                         if (diff.type == .added) {
-                            // If this is the first time the documents are added, add them all into the jobData array
-                            // TODO: FIX THIS
+                            // If this is the first time the documents are added, add them all into the photo dictionary
                             if (self.countQueries == 0) {
                                 print("Data added")
                                 // Clear photo array before reloading them
-                                self.photoDelegate?.clearPhotoArray()
+                                self.photoDelegate?.clearPhotoDictionary()
                                     
                                 // A short delay to allow the new photo to populate in Firebase Storage
                                 let secondsToDelay = 1.0
@@ -154,7 +153,7 @@ class DownloadDrawings {
                 // Data for the image is returned
                 //self.completedJobImage.image = UIImage(data: data!)
                 print("Download Occuring")
-                self.photoDelegate?.getPhoto(data: data!)
+                self.photoDelegate?.getPhoto(data: data!, id: id)
                 
             }
         }

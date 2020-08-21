@@ -6,7 +6,7 @@
 If the drawing you have chosen is owned by you, you will have the option to delete it.
 - If you click on the pencil icon at the top right of the screen (on the navigation bar) you will be able to create your own drawing. 
 
-https://raw.github.com/{dan-brown-8}/{DrawingGame}/{master}/{DrawingGameImages/Screen_Shot_2020-08-21_at_2.39.36_PM.png}
+https://raw.github.com/dan-brown-8/DrawingGame/master/DrawingGameImages/DrawingBoardVC.png
 
 - Click on the text fields above the piece of paper to customize the color, utensil, and brush width.
 

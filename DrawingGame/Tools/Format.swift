@@ -37,3 +37,27 @@ class FormatDate {
     }
 }
 
+/// Takes an int and converts it into a nice String to be presented
+class FormatTimeSpent {
+    
+    static func convertToString(timeSpent: Int) -> String {
+        
+        let minutes = Int(timeSpent / 60)
+        let seconds = timeSpent % 60
+        
+        if (minutes == 0) {
+            return "Time Spent:\n " + "\(seconds)" + " seconds"
+        }
+        else {
+            return "Time Spent:\n " + "\(minutes)" + " minutes " + "\(seconds)" + " seconds"
+        }
+    }
+}
+
+class RandomString {
+    static func generate(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+}
+

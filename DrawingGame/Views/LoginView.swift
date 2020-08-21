@@ -19,22 +19,22 @@ class LoginView: UIView, UITextFieldDelegate {
 
 @IBOutlet weak var loadingSpinnerView: UIActivityIndicatorView!
 
-override func awakeFromNib() {
-    super.awakeFromNib()
+    override func awakeFromNib() {
+        super.awakeFromNib()
     
-    addBorders()
-    
-    loadingSpinnerView.stopAnimating()
-    
-    FormatButton.makeRound(button: submitButton, cornerRadius: 5)
-    FormatButton.makeRound(button: registerButton, cornerRadius: 5)
-    
-    emailTextField.adjustsFontSizeToFitWidth = true
-    
-    // Allows the return button to close the keyboard
-    assignTextFieldDelegates()
+        addBorders()
         
-}
+        loadingSpinnerView.stopAnimating()
+    
+        FormatButton.makeRound(button: submitButton, cornerRadius: 5)
+        FormatButton.makeRound(button: registerButton, cornerRadius: 5)
+    
+        emailTextField.adjustsFontSizeToFitWidth = true
+    
+        // Allows the return button to close the keyboard
+        assignTextFieldDelegates()
+        
+    }
     
     /// Have the text fields conform to the text field delegate
     func assignTextFieldDelegates() {

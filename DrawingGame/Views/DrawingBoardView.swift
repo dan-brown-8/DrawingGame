@@ -38,16 +38,7 @@ class DrawingBoardView: UIView, UITextViewDelegate, UITextFieldDelegate {
         utensilTextField.delegate = self
         brushWidthTextField.delegate = self
         
-        // Change the placeholder text color to black
-        brushColorTextField.attributedPlaceholder = NSAttributedString(string: "Black",
-                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        // Change the placeholder text color to black
-        utensilTextField.attributedPlaceholder = NSAttributedString(string: "Brush",
-                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        
-        // Change the placeholder text color to black
-        brushWidthTextField.attributedPlaceholder = NSAttributedString(string: "Medium",
-                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        createPlaceholders()
         
         self.bringSubviewToFront(mainImage)
         self.bringSubviewToFront(tempDrawImage)
@@ -59,6 +50,18 @@ class DrawingBoardView: UIView, UITextViewDelegate, UITextFieldDelegate {
         Borders.createThinBorders(textFieldName: brushColorTextField)
         Borders.createThinBorders(textFieldName: utensilTextField)
         Borders.createThinBorders(textFieldName: brushWidthTextField)
+    }
+    
+    private func createPlaceholders() {
+        // Change the placeholder text color to black
+        brushColorTextField.attributedPlaceholder = NSAttributedString(string: "Black",
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+       
+        utensilTextField.attributedPlaceholder = NSAttributedString(string: "Brush",
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        
+        brushWidthTextField.attributedPlaceholder = NSAttributedString(string: "Medium",
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
     }
     
 }

@@ -43,7 +43,7 @@ class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
         // Add pencil image as navigation bar button
         let imageBarButton = UIBarButtonItem(image: UIImage(named: "Pencil3.png")!.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.action(sender:)))
         
-        // Adds the New+ button to the navigation bar
+        // Adds the pencil icon to the navigation bar
         self.navigationItem.rightBarButtonItem = imageBarButton
         
         // Sets the title and back bar color of the navigation bar

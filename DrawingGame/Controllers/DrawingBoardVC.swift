@@ -61,61 +61,17 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     /// Dismisses the picker and fills the text field
     @objc func dismissPicker() {
-    
         // Fills the text field when 'Done' is pressed
         if (drawingBoardView.brushColorTextField.isEditing) {
-            
-            let selectedRow : Int = drawingBoardView.brushColorPicker.selectedRow(inComponent: 0)
-            drawingBoardView.brushColorTextField.text = drawingBoardView.brushColorOptions[selectedRow]
-                                        
-            // Get the brushes UIColor from the pickers String value
-            let color = BrushSettings.colors[drawingBoardView.brushColorOptions[selectedRow]]
-            
-            if (drawingBoardView.utensilTextField.text == "Eraser") {
-                self.brushColor = .white
-            }
-            else {
-                // Adjust the brush color value based on the selected option
-                self.brushColor = color ?? UIColor.black
-                
-            }
-            
-            // Make sure the text is still easily visible if the selected color is a light color
-            if (color == UIColor.yellow || color == UIColor.green) {
-                drawingBoardView.brushColorTextField.textColor = .black
-            }
-            else {
-                drawingBoardView.brushColorTextField.textColor = .white
-            }
-        
-            drawingBoardView.brushColorTextField.backgroundColor = color
+            self.fillBrushColorTextField()
         }
-        
-        // Fills the text field when 'Done' is pressed
         if (drawingBoardView.utensilTextField.isEditing) {
-            let selectedRow : Int = drawingBoardView.utensilPicker.selectedRow(inComponent: 0)
-            drawingBoardView.utensilTextField.text = drawingBoardView.utensilOptions[selectedRow]
-            
-            if (drawingBoardView.utensilOptions[selectedRow] == "Eraser") {
-                self.brushColor = .white
-            }
-            else {
-                let selectedRow : Int = drawingBoardView.brushColorPicker.selectedRow(inComponent: 0)
-                self.brushColor = BrushSettings.colors[drawingBoardView.brushColorOptions[selectedRow]]!
-            }
-            
+            self.fillUtensilTextField()
         }
-
-        // Fills the text field when 'Done' is pressed
         if (drawingBoardView.brushWidthTextField.isEditing) {
-            let selectedRow : Int = drawingBoardView.brushWidthPicker.selectedRow(inComponent: 0)
-            drawingBoardView.brushWidthTextField.text = drawingBoardView.brushWidthOptions[selectedRow]
-            
-            // Adjust the brush width value
-            let width = BrushSettings.width[drawingBoardView.brushWidthOptions[selectedRow]]
-            self.brushWidth = width ?? 2.0
+            self.fillBrushWidthTextField()
         }
-    
+        
         // Hide the picker
         view.endEditing(true)
     }
@@ -135,7 +91,55 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         lastPoint = touch.location(in: drawingBoardView.mainImage)
     
     }
+    
+    /// Fills the text field once the picker is dismissed
+    func fillBrushColorTextField() {
+        let selectedRow : Int = drawingBoardView.brushColorPicker.selectedRow(inComponent: 0)
+        drawingBoardView.brushColorTextField.text = drawingBoardView.brushColorOptions[selectedRow]
+                                        
+        // Get the brushes UIColor from the pickers String value
+        let color = BrushSettings.colors[drawingBoardView.brushColorOptions[selectedRow]]
+            
+        if (drawingBoardView.utensilTextField.text == "Eraser") {
+            self.brushColor = .white
+        }
+        else {
+            self.brushColor = color ?? UIColor.black
+        }
         
+        // Make sure the text is still easily visible if the selected color is a light color
+        if (color == UIColor.yellow || color == UIColor.green) {
+            drawingBoardView.brushColorTextField.textColor = .black
+        }
+        else {
+            drawingBoardView.brushColorTextField.textColor = .white
+        }
+        
+        drawingBoardView.brushColorTextField.backgroundColor = color
+    }
+    
+    func fillUtensilTextField() {
+        let selectedRow : Int = drawingBoardView.utensilPicker.selectedRow(inComponent: 0)
+        drawingBoardView.utensilTextField.text = drawingBoardView.utensilOptions[selectedRow]
+        
+        if (drawingBoardView.utensilOptions[selectedRow] == "Eraser") {
+            self.brushColor = .white
+        }
+        else {
+            let selectedRow : Int = drawingBoardView.brushColorPicker.selectedRow(inComponent: 0)
+            self.brushColor = BrushSettings.colors[drawingBoardView.brushColorOptions[selectedRow]]!
+        }
+    }
+    
+    func fillBrushWidthTextField() {
+        let selectedRow : Int = drawingBoardView.brushWidthPicker.selectedRow(inComponent: 0)
+        drawingBoardView.brushWidthTextField.text = drawingBoardView.brushWidthOptions[selectedRow]
+        
+        // Adjust the brush width value
+        let width = BrushSettings.width[drawingBoardView.brushWidthOptions[selectedRow]]
+        self.brushWidth = width ?? 2.0
+    }
+    
     func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
         // Draws a line between two points
         UIGraphicsBeginImageContext(drawingBoardView.mainImage.frame.size)
@@ -201,7 +205,7 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let photo = drawingBoardView.mainImage.image!.jpegData(compressionQuality: 0.75)!
         
         // Generate a random 15 character id number
-        let id = randomString(length: 15)
+        let id = RandomString.generate(length: 15)
                         
         // Upload the drawing to Storage and create a document for the drawing in Firestore
         let uploadDrawing = UploadDrawing()
@@ -212,14 +216,8 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         timer.invalidate()
         
         self.navigationController?.popViewController(animated: true)
+    }
 
-    }
-    
-    func randomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).map{ _ in letters.randomElement()! })
-    }
-    
     // MARK: UIPickerViewDelegate
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -229,15 +227,11 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // The # of rows = the amount of options in the picker
         if (drawingBoardView.brushColorPicker == pickerView) {
-            return drawingBoardView.brushColorOptions.count
-        }
+            return drawingBoardView.brushColorOptions.count }
         else if (drawingBoardView.brushWidthPicker == pickerView) {
-            return drawingBoardView.brushWidthOptions.count
-        }
-        else
-        {
-            return drawingBoardView.utensilOptions.count
-        }
+            return drawingBoardView.brushWidthOptions.count }
+        else {
+            return drawingBoardView.utensilOptions.count }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -254,11 +248,4 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return "Error"
         }
     }
-        
 }
-
-
-
-
-
-

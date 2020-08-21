@@ -47,24 +47,11 @@ class DrawingDetailsVC: UIViewController {
         let date = FormatDate.formatDate(timestamp: drawingData.getDateCreated())
             
         drawingDetailsView.artistLabel.text = "By " + drawingData.getDisplayName()
-        drawingDetailsView.timeSpentLabel.text = formatTimeSpent()
+        drawingDetailsView.timeSpentLabel.text = FormatTimeSpent.convertToString(timeSpent: drawingData.getTimeSpent())
         drawingDetailsView.dateAndTimeCreatedLabel.text = date
         drawingDetailsView.drawingImage.image = self.drawingImage
                 
         self.showAnimation()
-    }
-    
-    /// Return time spent as a String that will be cleanly displayed on the view
-    func formatTimeSpent() -> String {
-        let minutes = Int(drawingData.getTimeSpent() / 60)
-        let seconds = drawingData.getTimeSpent() % 60
-        
-        if (minutes == 0) {
-            return "Time Spent:\n " + "\(seconds)" + " seconds"
-        }
-        else {
-            return "Time Spent:\n " + "\(minutes)" + " minutes " + "\(seconds)" + " seconds"
-        }
     }
     
     func loadInDrawingVideo() {

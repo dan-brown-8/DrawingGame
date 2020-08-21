@@ -59,7 +59,7 @@ class LoginVC: UIViewController, BeginLoginDelegate {
                 else {
                     self.loginView.stopAnimatingSpinner()
                     
-                    print(error)
+                   // print(error)
                     
                     // If the email/password weren't found, display a popup message
                     let alert = UIAlertController(title: "Incorrect email or password", message: "Please try again", preferredStyle: .alert )

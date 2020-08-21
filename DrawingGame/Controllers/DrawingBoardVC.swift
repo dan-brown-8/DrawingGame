@@ -8,39 +8,26 @@
 
 import UIKit
 import Foundation
-import QuartzCore
-import AVFoundation
 
 class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    //@IBOutlet weak var mainImage: UIImageView!
-    //@IBOutlet weak var tempDrawImage: UIImageView!
     @IBOutlet weak var drawingBoardView: DrawingBoardView!
-                
-    // delegate for saving drawing
-    
+    // Brush variables
     var lastPoint = CGPoint.zero
     var brushColor = UIColor.black
     var brushWidth : CGFloat = 4.5
     var opacity : CGFloat = 1.0
     var swiped = false
-    //declare blank timer variable
+    
     var timer = Timer()
     var timeSpentDrawing : Int = 0
-    
-   // private let screenRecorder = ScreenRecorder()
-   // private var player: AVAudioPlayer?
-    
-    var isRecording = false
-    
-   // let recorder = Recorder()
+    var timerStarted : Bool = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
             
         self.title = "Drawing Board"
         createPickers()
-        //  recorder.view = drawingBoardView
     }
     
     /// Creates all of the pickers to be used in the VC
@@ -69,7 +56,6 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @objc func startTimer() {
-        print("timer fired!")
         self.timeSpentDrawing += 1
     }
     
@@ -106,6 +92,10 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             if (drawingBoardView.utensilOptions[selectedRow] == "Eraser") {
                 self.brushColor = .white
             }
+            else {
+                let selectedRow : Int = drawingBoardView.brushColorPicker.selectedRow(inComponent: 0)
+                self.brushColor = BrushSettings.colors[drawingBoardView.brushColorOptions[selectedRow]]!
+            }
             
         }
 
@@ -128,8 +118,8 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return
         }
         
-        if (isRecording == false) {
-            self.isRecording = true
+        if (timerStarted == false) {
+            self.timerStarted = true
             // Start timer
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
         }
@@ -170,7 +160,6 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         guard let touch = touches.first else {
             return
         }
-            
         // Lets us keep track of when the user drags their finger along the screen
         swiped = true
         let currentPoint = touch.location(in: drawingBoardView.mainImage)
@@ -202,7 +191,6 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     // Called when the 'Agree' button is pressed
     @IBAction func save(_ sender: Any) {
-        print("Save Photo")
         let photo = drawingBoardView.mainImage.image!.jpegData(compressionQuality: 0.75)!
         
         // Generate a random 15 character id number
@@ -215,10 +203,6 @@ class DrawingBoardVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         // Stop timer
         timer.invalidate()
-      /*  screenRecorder.stoprecording(errorHandler: { error in
-            debugPrint("Error when recording \(error)")
-        }) */
-       // recorder.stop()
         
         self.navigationController?.popViewController(animated: true)
 

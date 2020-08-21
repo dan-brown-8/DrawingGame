@@ -16,13 +16,10 @@ class UploadDrawing {
     // Initialize database
     var db = Firestore.firestore()
     
-    /// Used to login the user once the account has been created
-   // weak var delegate : AccountCreatedDelegate?
-    
     init() {
         // Disable deprecated features
         let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
+       // settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
     }
     
@@ -34,17 +31,15 @@ class UploadDrawing {
         // Create a storage reference from our storage service
         let storageRef = storage.reference(withPath: "photos/" + photoId)
         
-        let uploadTask = storageRef.putData(data, metadata: nil) { (metadata, error) in
+        _ = storageRef.putData(data, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
                 print("METADATA ERROR")
                 return
             }
-            // Metadata contains file metadata such as size, content-type.
-            let size = metadata.size
             // You can also access to download URL after upload.
             storageRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
+                guard url != nil else {
                     print("URL ERROR")
                     return
                 }

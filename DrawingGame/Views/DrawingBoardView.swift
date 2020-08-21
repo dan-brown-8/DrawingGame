@@ -25,12 +25,6 @@ class DrawingBoardView: UIView, UITextViewDelegate, UITextFieldDelegate {
     let brushColorOptions = ["Black", "Green", "Blue", "Red", "Yellow"]
     let utensilOptions = ["Brush", "Eraser"]
     let brushWidthOptions = ["Extra Thin", "Thin", "Medium", "Thick", "Extra Thick"]
-
-    /* var lastPoint = CGPoint.zero
-    var color = UIColor.black
-    var brushWidth : CGFloat = 2.0
-    var opacity : CGFloat = 1.0
-    var swiped = false */
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,7 +49,6 @@ class DrawingBoardView: UIView, UITextViewDelegate, UITextFieldDelegate {
         brushWidthTextField.attributedPlaceholder = NSAttributedString(string: "Medium",
                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
-        //self.backgroundColor = UIColor.lightGray()
         self.bringSubviewToFront(mainImage)
         self.bringSubviewToFront(tempDrawImage)
     }

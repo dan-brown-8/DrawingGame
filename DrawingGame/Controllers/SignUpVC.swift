@@ -102,7 +102,7 @@ class SignUpVC: UIViewController, AccountCreatedDelegate {
     
     // MARK: Seguing and preparing to segue
 
-    /// Called once the user data is retrieved from the database, part of the beginLoginDelegate
+    /// Called once the user data is retrieved from the database, part of the AccountCreatedDelegate
     func segueToPublicList() {
         // Append the job data into the 2D array
         self.performSegue(withIdentifier: "signUpSuccessful", sender: self)
@@ -117,8 +117,6 @@ class SignUpVC: UIViewController, AccountCreatedDelegate {
             if let user = authResult?.user {
                 
                 let register = RegisterUser()
-              //  print("Ready to register the user")
-                
                 register.delegate = self
                 // Store all of the registration data to the Database
                 register.createDocument(email: self.signUpView.emailTextField.text!.lowercased(), displayName: self.signUpView.displayNameTextField.text!)
@@ -127,7 +125,6 @@ class SignUpVC: UIViewController, AccountCreatedDelegate {
             else {
                 self.signUpView.stopAnimatingSpinner()
                 // If the Firebase Authentication account cannot be created, display a popup message
-                // TODO: Add (or the email address is invalid)
                 let title = "An account already exists with that email address"
                 let message = "Try a different email"
                 CommonAlerts.showAlert(vc: self, title: title, message: message)

@@ -71,9 +71,7 @@ class LoginVC: UIViewController, BeginLoginDelegate {
     // If register button is tapped, move to the registration view
     @IBAction func registerButtonTapped(_ sender: UIButton) {
         
-        print("Register button tapped")
         self.performSegue(withIdentifier: "toSignUp", sender: self)
-        
     }
     
     // Dismisses the keyboard when the view is tapped on
@@ -82,7 +80,7 @@ class LoginVC: UIViewController, BeginLoginDelegate {
         self.loginView.passwordTextField.resignFirstResponder()
     }
       
-    /// Called once the user data is retrieved from the database, part of the beginLoginDelegate
+    /// Called once the user data is retrieved from the database, part of the BeginLoginDelegate
     func segueToPublicList() {
         // If the email/password were found, enter the app
         self.performSegue(withIdentifier: "loginSuccessful", sender: self)

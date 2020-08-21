@@ -10,13 +10,8 @@ import UIKit
 
 class PublicListView: UIView {
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        print("View Display")
-        
-    }
     
+    }
 }

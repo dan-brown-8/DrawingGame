@@ -14,6 +14,8 @@ class DrawingDetailsVC: UIViewController {
     
     var drawingData : DrawingDataModel = DrawingDataModel()
     
+    var drawingImage : UIImage = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +38,6 @@ class DrawingDetailsVC: UIViewController {
     func setupViews() {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.view.bringSubviewToFront(drawingDetailsView)
-       // drawingDetailsView.loadingSpinnerView.isHidden = true
         
         // Dont allow users to delete drawings that aren't theirs
         if (drawingData.getArtist() != UserDataModel.getEmail()) {
@@ -44,15 +45,16 @@ class DrawingDetailsVC: UIViewController {
         }
         
         let date = FormatDate.formatDate(timestamp: drawingData.getDateCreated())
-       // let time = FormatDate.formatTime(timestamp: drawingData.getDateCreated())
             
         drawingDetailsView.artistLabel.text = "By " + drawingData.getDisplayName()
         drawingDetailsView.timeSpentLabel.text = formatTimeSpent()
         drawingDetailsView.dateAndTimeCreatedLabel.text = date
+        drawingDetailsView.drawingImage.image = self.drawingImage
         
         self.showAnimation()
     }
     
+    /// Return time spent as a String that will be cleanly displayed on the view
     func formatTimeSpent() -> String {
         let minutes = Int(drawingData.getTimeSpent() / 60)
         let seconds = drawingData.getTimeSpent() % 60

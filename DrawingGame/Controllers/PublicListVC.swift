@@ -22,6 +22,7 @@ class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Create proper spacing for the collectionView
         let width = (view.frame.size.width - 20) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
@@ -49,9 +50,9 @@ class PublicListVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.navigationItem.title = "Public Drawings"
     }
     
-    // Handle what happens when the 'New +' button is pressed, sho
+    // Handle what happens when the pencil icon is pressed
     @objc func action(sender: UIBarButtonItem) {
-            performSegue(withIdentifier: "toNewDrawing", sender: self)
+        performSegue(withIdentifier: "toNewDrawing", sender: self)
     }
 }
     
@@ -80,11 +81,13 @@ extension PublicListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     // When a drawing is selected, display the drawing details pop up and pass in the data
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       // guard let cell = collectionView.cellForItem(at: indexPath) else { return }
 
         let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "drawingDetailsId") as! DrawingDetailsVC
         popUpVC.drawingData = self.drawingData[indexPath.row]
-        PresentPopUpVC.presentPopUp(popUpVC: popUpVC, presentingVC: self)        
+        
+        let imageRef = self.drawingData[indexPath.row].getDocId()
+        popUpVC.drawingImage = (self.drawingImages[imageRef] as? UIImage)!
+        PresentPopUpVC.presentPopUp(popUpVC: popUpVC, presentingVC: self)
     }
 
 

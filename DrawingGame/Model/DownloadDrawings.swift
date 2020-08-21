@@ -18,7 +18,6 @@ import FirebaseFirestore
  */
 protocol GetPhotoDelegate: class {
     func getPhoto(data: Data, id: String)
- //   func updateImages(image: Data, index: Int)
     func clearPhotoDictionary()
 }
 
@@ -31,7 +30,7 @@ protocol GetDrawingDataDelegate : class {
 /// Handle retrieving all drawing data and images
 class DownloadDrawings {
         
-    // MARK: Listeners for updates to the drawings in the database
+    // MARK: Listener for updates to the drawings in the database
     static var drawingListener : ListenerRegistration?
         
     /// Singleton so the class can only be called once
@@ -65,8 +64,6 @@ class DownloadDrawings {
                     print("Error getting documents: \(err)")
                 }
                 else {
-                    print("Drawing listener has begun listening...")
-                        
                     guard let snapshot = querySnapshot else {
                         print("Error fetching snapshots: \(err!)")
                         return
@@ -77,7 +74,7 @@ class DownloadDrawings {
                         if (diff.type == .added) {
                             // If this is the first time the documents are added, add them all into the photo dictionary
                             if (self.countQueries == 0) {
-                                print("Data added")
+                                //print("Data added")
                                 // Clear photo array before reloading them
                                 self.photoDelegate?.clearPhotoDictionary()
                                     
@@ -110,7 +107,6 @@ class DownloadDrawings {
         }
     }
         
-    /// Decides which getData function will be called based on the job type
     func getListenerData(querySnapshot: QuerySnapshot) {
             
         let drawingData = getDrawingData(documents: querySnapshot.documents)
@@ -151,7 +147,6 @@ class DownloadDrawings {
                 // Uh-oh, an error occurred!
             } else {
                 // Data for the image is returned
-                //self.completedJobImage.image = UIImage(data: data!)
                 print("Download Occuring")
                 self.photoDelegate?.getPhoto(data: data!, id: id)
                 

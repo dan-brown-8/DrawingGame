@@ -19,13 +19,13 @@ class DeleteDrawing {
     init() {
         // Disable deprecated features
         let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
+     //   settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
     }
     
     /// Delete the photo of the drawing in Firebase Storage
     func deletePhoto(photoId: String) {
-        // Get a reference to the storage service using the default Firebase App
+        
         let storage = Storage.storage()
         let storageRef = storage.reference(withPath: "photos/" + photoId)
 
@@ -40,7 +40,7 @@ class DeleteDrawing {
         }
     }
     
-    /// Create the user document in Firebase
+    /// Delete the drawing document in Firebase
     func deleteDrawingDocument(id: String) {
         db.collection("drawings").document(id).delete() { err in
             if let err = err {

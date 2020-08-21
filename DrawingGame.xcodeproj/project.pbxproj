@@ -24,8 +24,6 @@
 		57CA30AB24EF8EC1002EFEF6 /* DrawingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA30AA24EF8EC1002EFEF6 /* DrawingDetailsView.swift */; };
 		57CA30AD24EF944D002EFEF6 /* PresentPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA30AC24EF944D002EFEF6 /* PresentPopUpVC.swift */; };
 		57CA30AF24EF9A03002EFEF6 /* DeleteDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA30AE24EF9A03002EFEF6 /* DeleteDrawing.swift */; };
-		57CA30B524EFC6C9002EFEF6 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA30B424EFC6C9002EFEF6 /* ScreenRecorder.swift */; };
-		57CA30BD24EFD9A5002EFEF6 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA30BC24EFD9A5002EFEF6 /* Recorder.swift */; };
 		57D18D0324ED792B0073761B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0224ED792B0073761B /* AppDelegate.swift */; };
 		57D18D0524ED792B0073761B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0424ED792B0073761B /* SceneDelegate.swift */; };
 		57D18D0724ED792B0073761B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D18D0624ED792B0073761B /* SignUpVC.swift */; };
@@ -85,8 +83,6 @@
 		57CA30AA24EF8EC1002EFEF6 /* DrawingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingDetailsView.swift; sourceTree = "<group>"; };
 		57CA30AC24EF944D002EFEF6 /* PresentPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentPopUpVC.swift; sourceTree = "<group>"; };
 		57CA30AE24EF9A03002EFEF6 /* DeleteDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDrawing.swift; sourceTree = "<group>"; };
-		57CA30B424EFC6C9002EFEF6 /* ScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
-		57CA30BC24EFD9A5002EFEF6 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		57D18CFF24ED792B0073761B /* DrawingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D18D0224ED792B0073761B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57D18D0424ED792B0073761B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,8 +148,6 @@
 				574AE84A24EE2F6F0037F4E2 /* Format.swift */,
 				574AE85024EE41E40037F4E2 /* CommonAlerts.swift */,
 				57CA30AC24EF944D002EFEF6 /* PresentPopUpVC.swift */,
-				57CA30B424EFC6C9002EFEF6 /* ScreenRecorder.swift */,
-				57CA30BC24EFD9A5002EFEF6 /* Recorder.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -528,7 +522,6 @@
 			files = (
 				57CA30AB24EF8EC1002EFEF6 /* DrawingDetailsView.swift in Sources */,
 				574AE85924EEDCD10037F4E2 /* DrawingDataModel.swift in Sources */,
-				57CA30B524EFC6C9002EFEF6 /* ScreenRecorder.swift in Sources */,
 				57CA30A924EF8DD0002EFEF6 /* DrawingDetailsVC.swift in Sources */,
 				57D18D0724ED792B0073761B /* SignUpVC.swift in Sources */,
 				574AE84924EE24A60037F4E2 /* BrushSettings.swift in Sources */,
@@ -545,7 +538,6 @@
 				57D18D0324ED792B0073761B /* AppDelegate.swift in Sources */,
 				57D18D4124ED7E3F0073761B /* PublicListView.swift in Sources */,
 				57D18D3F24ED7E360073761B /* SignUpView.swift in Sources */,
-				57CA30BD24EFD9A5002EFEF6 /* Recorder.swift in Sources */,
 				574AE84F24EE37B70037F4E2 /* GetUserData.swift in Sources */,
 				574AE85724EE6AFE0037F4E2 /* DownloadDrawings.swift in Sources */,
 				574AE85324EE47AF0037F4E2 /* RegisterUser.swift in Sources */,

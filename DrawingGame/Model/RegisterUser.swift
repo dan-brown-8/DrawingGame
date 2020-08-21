@@ -25,7 +25,7 @@ class RegisterUser {
     init() {
         // Disable deprecated features
         let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
+     //   settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
     }
     

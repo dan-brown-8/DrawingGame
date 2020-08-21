@@ -12,7 +12,8 @@ import UIKit
 class DrawingDetailsView: UIView {
     
     @IBOutlet weak var deleteButton: UIButton!
-    //    @IBOutlet weak var loadingSpinnerView: UIActivityIndicatorView!
+    
+    @IBOutlet weak var drawingImage: UIImageView!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var timeSpentLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
@@ -28,8 +29,6 @@ class DrawingDetailsView: UIView {
         self.clipsToBounds = true
                                 
         formatViews()
-       // loadingSpinnerView.stopAnimating()
-     //   self.bringSubviewToFront(loadingSpinnerView)
     }
     
     func formatViews() {
@@ -41,20 +40,8 @@ class DrawingDetailsView: UIView {
         FormatButton.makeRound(button: exitButton, cornerRadius: 5)
         Borders.createThinBorders(buttonName: exitButton)
         
+        Borders.createBorders(imageName: drawingImage)
+        
     }
-    
-  /*  /// Starts the animation of the spinner
-    func startAnimatingSpinner() {
-        loadingSpinnerView.startAnimating()
-        headToCheckoutButton.isEnabled = false
-        applyButton.isEnabled = false
-    }
-    
-    /// Stops the animation of the spinner
-    func stopAnimatingSpinner() {
-        loadingSpinnerView.stopAnimating()
-        headToCheckoutButton.isEnabled = true
-        applyButton.isEnabled = true
-    } */
     
 }

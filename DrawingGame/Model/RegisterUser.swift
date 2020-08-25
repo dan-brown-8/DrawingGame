@@ -46,6 +46,7 @@ class RegisterUser {
             } else {
                 print("Document successfully written!")
                 UserDataModel.setDisplayName(displayName: displayName!)
+                UserDataModel.setEmail(email: email!.lowercased())
                 self.delegate?.segueToPublicList()
             }
         }

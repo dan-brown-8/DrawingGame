@@ -17,6 +17,10 @@ https://raw.github.com/dan-brown-8/DrawingGame/master/DrawingGameImages/DrawingB
 - I made an effort to separate reusable classes/functions from the ViewController whenever possible to try and avoid the common “Massive View Controller” issue.
 - Folder structure: 1. Model (data models and calls to the database) 2. Tools (Formatting, common UI functions, etc) 3. Storybaards 4. Controllers 5. Views 
 
+**Technical Decisions:**
+- I decided to use a collectionView to display the drawing images. This allowed me to show several images at a time cleanly and effectively and I thought that this made more sense than using something like a tableView. 
+- I display the additional drawing details in a popUpViewController. The popUpVC keeps the app simplistic and spacious while providing the user with some additional detail.
+- All UI decisions were made with the intent to keep everything simple, clean, efficient, and effective.
 
 **If I had more time or if this were for production:**
 - Write automated tests.
